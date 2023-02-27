@@ -1,57 +1,45 @@
 ﻿// Задача 3: Задайте массив вещественных чисел.
 // Найдите разницу между максимальным и минимальным элементов массива.
 // [3 7 22 2 78] -> 76
-double[] GenerateArray(int length, int minValue, int maxValue)
-{
-    double[] result = new double[length];             
-    var rnd = new Random();                  
 
-    
-    for (int i = 0; i < result.Length; i++)
-    {
-        result[i] = rnd.Next(minValue, maxValue + 1);
-    }
-
-    return result;
-}
-void ShowArray(double[] array)
-{
-    System.Console.Write("[ ");
-    for (int i = 0; i < array.Length; i++)
-    {
-        System.Console.Write(array[i] + " ");
-    }
-    System.Console.Write("]");
-    System.Console.WriteLine();
-}
-
-double MaxMinR(double[] array)
-{
-    double min = Int32.MaxValue;
-    double max = Int32.MaxValue;  
-    for (int i = 0; i < array.Length; i++) 
-    {
-        if (array[i] > max)
-        {
-            max = array[i];
-        }
-         if (array[i] < min)
-        {
-            min = array[i];
-        }
-    }
-    double raz = max - min;
-    return raz;
-}
-
-
-System.Console.WriteLine("Введите размер массива > ");
+Console.WriteLine("Введите размер массива  ");
 int size = Convert.ToInt32(Console.ReadLine());
-System.Console.WriteLine("Введите минимальный размер массива >");
-int minValue = Convert.ToInt32(Console.ReadLine());
-System.Console.WriteLine("Введите максимальный размер массива >");
-int maxValue = Convert.ToInt32(Console.ReadLine());
-double[] myArray = GenerateArray(size, minValue, maxValue);
-ShowArray(myArray);
-double razn = MaxMinR(myArray);
-System.Console.WriteLine($"Разница между максимальным и минимальным элементом массива равна {razn}");
+double[] numbers = new double[size];
+FillArrayRandomNumbers(numbers);
+Console.WriteLine("массив: ");
+PrintArray(numbers);
+double min = Int32.MaxValue;
+double max = Int32.MinValue;
+
+for (int z = 0; z < numbers.Length; z++)        // я так и не понял как преобразовать целочисленные данные в вещественные
+{                                               // это скопированный код, поэтому не ставьте баллы за него
+    if (numbers[z] > max)
+        {
+            max = numbers[z];
+        }
+    if (numbers[z] < min)
+        {
+            min = numbers[z];
+        }
+}
+
+Console.WriteLine($"Всего {numbers.Length} чисел. Максимальное значение = {max}, минимальное значение = {min}");
+Console.WriteLine($"Разница между максимальным и минимальным значением = {max - min}");
+
+void FillArrayRandomNumbers(double[] numbers)
+{
+    for(int i = 0; i < numbers.Length; i++)
+        {
+            numbers[i] = Convert.ToDouble(new Random().Next(100,1000)) / 100;
+        }
+}
+void PrintArray(double[] numbers)
+{
+    Console.Write("[ ");
+    for(int i = 0; i < numbers.Length; i++)
+        {
+            Console.Write(numbers[i] + " ");
+        }
+    Console.Write("]");
+    Console.WriteLine();
+}
